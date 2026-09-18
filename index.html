@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <meta
+      name="theme-color"
+      content="#0f0d0a"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#fffdf8"
+      media="(prefers-color-scheme: light)"
+    />
+
+    <!--
+      Applies the saved theme before first paint. Without this the page renders
+      dark (the default on <html>) and then snaps to light for anyone who chose
+      it — a visible flash on every navigation.
+    -->
+    <script>
+      ;(function () {
+        try {
+          var stored = localStorage.getItem('theme')
+          if (stored === 'light') {
+            document.documentElement.classList.remove('dark')
+            document.documentElement.style.colorScheme = 'light'
+          }
+        } catch (e) {
+          /* private mode / blocked storage — keep the dark default */
+        }
+      })()
+    </script>
+
+    <title>Achref Maarfi | Software Engineer</title>
+    <meta
+      name="description"
+      content="Software Engineer based in Tunisia. Full-stack engineer crafting scalable, user-centered web applications with React, Next.js, Django and PostgreSQL."
+    />
+    <meta name="author" content="Achref Maarfi" />
+
+    <!-- Open Graph / social share -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Achref Maarfi | Software Engineer" />
+    <meta
+      property="og:description"
+      content="Full-stack engineer crafting scalable, user-centered web applications with React, Next.js, Django and PostgreSQL."
+    />
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Achref Maarfi | Software Engineer" />
+    <meta
+      name="twitter:description"
+      content="Full-stack engineer crafting scalable, user-centered web applications with React, Next.js, Django and PostgreSQL."
+    />
+    <meta name="twitter:image" content="/og-image.jpg" />
+
+    <!-- Structured data: makes a search for the name resolve here with detail -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Achref Maarfi",
+        "jobTitle": "Software Engineer",
+        "email": "achref.maarfi0@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ariana",
+          "addressCountry": "TN"
+        },
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "ESPRIT" },
+          { "@type": "CollegeOrUniversity", "name": "ISET Béja" }
+        ],
+        "knowsAbout": [
+          "React",
+          "Next.js",
+          "Django",
+          "PostgreSQL",
+          "Docker",
+          "TypeScript"
+        ],
+        "sameAs": [
+          "https://github.com/achrefmaarfi",
+          "https://www.linkedin.com/in/achrefmaarfi/"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

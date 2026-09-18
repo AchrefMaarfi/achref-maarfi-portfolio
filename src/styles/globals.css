@@ -1,0 +1,246 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/inter';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------------------
+   Brand accents — literal values, so Tailwind generates real utilities
+   (text-amber, shadow-glow-amber, …).
+
+   Amber primary with a violet secondary: violet sits opposite amber on the
+   wheel, so the two stay clearly distinct against a near-black ground instead
+   of blurring into one warm mass.
+   --------------------------------------------------------------------------- */
+@theme {
+    --color-amber: #ffb020;
+    --color-amber-soft: #ffd166;
+    --color-violet: #8b5cf6;
+    --color-ember: #ff8a3d;
+
+    --shadow-glow-amber: 0 0 10px #ffb020, 0 0 40px #ffb02044;
+    --shadow-glow-amber-lg: 0 0 20px #ffb020aa, 0 0 60px #ffb02055;
+    --shadow-glow-violet: 0 0 10px #8b5cf6, 0 0 40px #8b5cf644;
+
+    --font-sans: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+/* shadcn's alias layer: maps --color-* utilities onto the bare vars below. */
+@theme inline {
+    --font-heading: var(--font-sans);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --color-surface: var(--surface);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ---------------------------------------------------------------------------
+   LIGHT (:root) — the fallback theme. Warm off-white rather than pure white, so
+   the amber accents sit on a related ground instead of fighting a cold one.
+
+   Primary is deepened to amber-700 here: #ffb020 is gorgeous on black but only
+   ~1.8:1 against white, far below the 4.5:1 body-text floor.
+   --------------------------------------------------------------------------- */
+:root {
+    --background: #fffdf8;
+    --foreground: #1a1712;
+
+    --card: #ffffff;
+    --card-foreground: #1a1712;
+
+    --surface: #f6f1e7;
+
+    --popover: #ffffff;
+    --popover-foreground: #1a1712;
+
+    --primary: #b45309;
+    --primary-foreground: #fffdf8;
+
+    --secondary: #f6f1e7;
+    --secondary-foreground: #1a1712;
+
+    --muted: #f6f1e7;
+    --muted-foreground: #6b6154;
+
+    --accent: #7c3aed;
+    --accent-foreground: #fffdf8;
+
+    --destructive: #dc2626;
+
+    --border: rgb(26 23 18 / 0.1);
+    --input: rgb(26 23 18 / 0.14);
+    --ring: #b45309;
+
+    --chart-1: #b45309;
+    --chart-2: #7c3aed;
+    --chart-3: #ea580c;
+    --chart-4: #0d9488;
+    --chart-5: #64748b;
+
+    --radius: 0.75rem;
+
+    --sidebar: #ffffff;
+    --sidebar-foreground: #1a1712;
+    --sidebar-primary: #b45309;
+    --sidebar-primary-foreground: #fffdf8;
+    --sidebar-accent: #f6f1e7;
+    --sidebar-accent-foreground: #1a1712;
+    --sidebar-border: rgb(26 23 18 / 0.1);
+    --sidebar-ring: #b45309;
+
+    /* Glows become soft drop shadows in light mode — a bloom on a white ground
+       reads as a rendering artifact, not as light. */
+    --shadow-glow-amber: 0 2px 8px #b4530926;
+    --shadow-glow-amber-lg: 0 6px 20px #b4530933;
+    --shadow-glow-violet: 0 2px 8px #7c3aed26;
+}
+
+/* ---------------------------------------------------------------------------
+   DARK (.dark) — the default; index.html ships class="dark" on <html>.
+   Warm-tinted near-black rather than neutral, so it shares a temperature with
+   the amber accents.
+   --------------------------------------------------------------------------- */
+.dark {
+    --background: #0f0d0a;
+    --foreground: #ece8e1;
+
+    --card: #17140f;
+    --card-foreground: #ece8e1;
+
+    --surface: #221d16;
+
+    --popover: #17140f;
+    --popover-foreground: #ece8e1;
+
+    --primary: #ffb020;
+    --primary-foreground: #0f0d0a;
+
+    --secondary: #221d16;
+    --secondary-foreground: #ece8e1;
+
+    --muted: #221d16;
+    --muted-foreground: #a09686;
+
+    --accent: #8b5cf6;
+    --accent-foreground: #f7f4ff;
+
+    --destructive: #ff5f57;
+
+    --border: rgb(255 255 255 / 0.08);
+    --input: rgb(255 255 255 / 0.12);
+    --ring: #ffb020;
+
+    --chart-1: #ffb020;
+    --chart-2: #8b5cf6;
+    --chart-3: #ff8a3d;
+    --chart-4: #ffd166;
+    --chart-5: #2dd4bf;
+
+    --sidebar: #17140f;
+    --sidebar-foreground: #ece8e1;
+    --sidebar-primary: #ffb020;
+    --sidebar-primary-foreground: #0f0d0a;
+    --sidebar-accent: #221d16;
+    --sidebar-accent-foreground: #ece8e1;
+    --sidebar-border: rgb(255 255 255 / 0.08);
+    --sidebar-ring: #ffb020;
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    html {
+        @apply font-sans;
+        scroll-behavior: smooth;
+        /* Fixed header clearance for every in-page anchor. */
+        scroll-padding-top: 5rem;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        /* Safety net only — the real fix is never exceeding the viewport. */
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Focus ring tracks the theme's primary, so it stays visible in both. */
+    :focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+}
+
+@layer utilities {
+    /* Glowing treatment for the highlighted word in headings. */
+    .glow-text {
+        color: var(--primary);
+        text-shadow: var(--shadow-glow-amber);
+    }
+}
+
+/* Slow ambient drift for the mobile CSS background blooms. Kept outside
+   @layer utilities so the animation-duration override in the reduced-motion
+   block above still wins by cascade order. */
+@keyframes drift {
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(30px, -20px) scale(1.1);
+    }
+}
