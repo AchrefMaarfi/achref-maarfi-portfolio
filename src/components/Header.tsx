@@ -32,11 +32,11 @@ export function Header() {
           className="group relative text-xl font-extrabold tracking-tight sm:text-2xl"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
-          <span className="absolute inset-0 -z-10 blur-lg opacity-0 transition-opacity group-hover:opacity-75 bg-linear-to-r from-primary to-amber-300" />
-          <span className="bg-linear-to-r from-foreground to-primary bg-clip-text text-transparent transition-all group-hover:from-primary group-hover:to-amber-300">
+          <span className="absolute inset-0 -z-10 blur-lg opacity-0 transition-opacity group-hover:opacity-35 bg-linear-to-r from-primary to-amber-300" />
+          <span className="bg-linear-to-r from-foreground to-primary bg-clip-text text-transparent">
             {person.firstName.toUpperCase()}
           </span>
-          <span className="ml-1.5 bg-linear-to-r from-primary to-amber-300 bg-clip-text text-transparent transition-all group-hover:from-amber-300 group-hover:to-primary">
+          <span className="ml-1.5 bg-linear-to-r from-primary to-amber-300 bg-clip-text text-transparent">
             {person.lastName.toUpperCase()}
           </span>
         </a>

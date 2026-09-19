@@ -9,6 +9,15 @@ import { contact } from '@/data/content'
 
 const icons = { Email: Mail, GitHub: GithubIcon, LinkedIn: LinkedinIcon, Location: MapPin }
 
+// Per-platform brand tints for the icon badge. GitHub has no official brand
+// color, so it borrows the site's violet accent instead of forcing one.
+const colors = {
+  Email: 'bg-primary/10 text-primary',
+  GitHub: 'bg-accent/10 text-accent',
+  LinkedIn: 'bg-[#3B9EF5]/10 text-[#3B9EF5]',
+  Location: 'bg-teal-500/10 text-teal-500',
+} satisfies Record<string, string>
+
 export function Contact() {
   return (
     <Section id="contact" className="bg-surface/40">
@@ -23,6 +32,7 @@ export function Contact() {
         <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
           {contact.links.map((link, i) => {
             const Icon = icons[link.label as keyof typeof icons]
+            const colorClass = colors[link.label as keyof typeof colors]
             return (
               <Reveal key={link.label} delay={i * 60}>
                 <a
@@ -33,7 +43,9 @@ export function Contact() {
                 >
                   <Card variant="glow" className="h-full">
                     <CardContent className="flex min-h-11 items-center gap-4">
-                      <div className="bg-primary/10 text-primary flex size-11 shrink-0 items-center justify-center rounded-xl">
+                      <div
+                        className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${colorClass}`}
+                      >
                         <Icon className="size-5" aria-hidden="true" />
                       </div>
                       <div className="min-w-0">

@@ -14,7 +14,9 @@ type Particle = {
 
 const PARTICLE_COUNT = 90
 const LINK_DISTANCE = 130
+const LINK_DISTANCE_SQ = LINK_DISTANCE * LINK_DISTANCE
 const MOUSE_RADIUS = 150
+const MOUSE_RADIUS_SQ = MOUSE_RADIUS * MOUSE_RADIUS
 
 function makeParticle(width: number, height: number): Particle {
   return {
@@ -28,13 +30,18 @@ function makeParticle(width: number, height: number): Particle {
   }
 }
 
+type ParticlesProps = {
+  /** Tints every particle and link violet instead of the default amber/violet mix — used on project pages that lean on the accent color rather than the site's primary amber. */
+  accentOnly?: boolean
+}
+
 /**
  * Ambient background. Desktop (>=768px) gets a canvas particle field that
  * drifts and links to the mouse; phones get a static/slow CSS gradient —
  * the canvas's rAF loop plus its O(n^2) link pass causes real thermal
  * throttling on mid-range phones, so it is never mounted there at all.
  */
-export function Particles() {
+export function Particles({ accentOnly = false }: ParticlesProps = {}) {
   const isDesktop = useMediaQuery('(min-width: 768px)')
   const reducedMotion = usePrefersReducedMotion()
 
@@ -44,16 +51,24 @@ export function Particles() {
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
       >
-        <div className="bg-primary/20 absolute -top-32 -left-24 size-80 rounded-full blur-3xl motion-safe:animate-[drift_16s_ease-in-out_infinite]" />
+        <div
+          className={`absolute -top-32 -left-24 size-80 rounded-full blur-3xl motion-safe:animate-[drift_16s_ease-in-out_infinite] ${accentOnly ? 'bg-accent/20' : 'bg-primary/20'}`}
+        />
         <div className="bg-accent/20 absolute top-1/2 -right-24 size-96 rounded-full blur-3xl motion-safe:animate-[drift_20s_ease-in-out_infinite_reverse]" />
       </div>
     )
   }
 
-  return <ParticleCanvas active={!reducedMotion} />
+  return <ParticleCanvas active={!reducedMotion} accentOnly={accentOnly} />
 }
 
-function ParticleCanvas({ active }: { active: boolean }) {
+function ParticleCanvas({
+  active,
+  accentOnly,
+}: {
+  active: boolean
+  accentOnly: boolean
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -82,8 +97,10 @@ function ParticleCanvas({ active }: { active: boolean }) {
       mouseY = e.clientY
     }
 
+    let resizeTimeout = 0
     function onResize() {
-      resize()
+      window.clearTimeout(resizeTimeout)
+      resizeTimeout = window.setTimeout(resize, 150)
     }
 
     window.addEventListener('resize', onResize)
@@ -114,8 +131,7 @@ function ParticleCanvas({ active }: { active: boolean }) {
 
         const dx = mouseX - p.x
         const dy = mouseY - p.y
-        const dist = Math.sqrt(dx * dx + dy * dy)
-        if (dist < MOUSE_RADIUS) {
+        if (dx * dx + dy * dy < MOUSE_RADIUS_SQ) {
           p.x -= dx * 0.005
           p.y -= dy * 0.005
         }
@@ -126,20 +142,23 @@ function ParticleCanvas({ active }: { active: boolean }) {
 
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${p.isAmber ? amberRgb : violetRgb}, ${p.opacity})`
+        const useAmber = !accentOnly && p.isAmber
+        ctx.fillStyle = `rgba(${useAmber ? amberRgb : violetRgb}, ${p.opacity})`
         ctx.fill()
       }
 
+      const linkColor = accentOnly ? violetRgb : amberRgb
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x
           const dy = particles[i].y - particles[j].y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < LINK_DISTANCE) {
+          const distSq = dx * dx + dy * dy
+          if (distSq < LINK_DISTANCE_SQ) {
+            const dist = Math.sqrt(distSq)
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(${amberRgb}, ${(1 - dist / LINK_DISTANCE) * 0.15})`
+            ctx.strokeStyle = `rgba(${linkColor}, ${(1 - dist / LINK_DISTANCE) * 0.15})`
             ctx.lineWidth = 0.5
             ctx.stroke()
           }
@@ -152,10 +171,11 @@ function ParticleCanvas({ active }: { active: boolean }) {
 
     return () => {
       cancelAnimationFrame(rafId)
+      window.clearTimeout(resizeTimeout)
       window.removeEventListener('resize', onResize)
       window.removeEventListener('mousemove', onMouseMove)
     }
-  }, [active])
+  }, [active, accentOnly])
 
   return (
     <canvas

@@ -1,11 +1,11 @@
-import { Download } from 'lucide-react'
-import { Container } from '@/components/layout/Container'
-import { Reveal } from '@/components/layout/Reveal'
-import { Section } from '@/components/layout/Section'
-import { SectionHeader } from '@/components/layout/SectionHeader'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { about, person } from '@/data/content'
+import { Download } from "lucide-react";
+import { Container } from "@/components/layout/Container";
+import { Reveal } from "@/components/layout/Reveal";
+import { Section } from "@/components/layout/Section";
+import { SectionHeader } from "@/components/layout/SectionHeader";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { about, person } from "@/data/content";
 
 export function About() {
   return (
@@ -13,7 +13,6 @@ export function About() {
       <Container>
         <SectionHeader
           id="about"
-          tag={about.tag}
           title={about.title}
           align="left"
           className="mx-0 max-w-2xl text-left"
@@ -40,7 +39,10 @@ export function About() {
               <CardContent>
                 <dl className="divide-border grid divide-y">
                   {about.facts.map((fact) => (
-                    <div key={fact.label} className="flex flex-col gap-1 py-3 first:pt-0 last:pb-0">
+                    <div
+                      key={fact.label}
+                      className="flex flex-col gap-1 py-3 first:pt-0 last:pb-0"
+                    >
                       <dt className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
                         {fact.label}
                       </dt>
@@ -54,5 +56,5 @@ export function About() {
         </div>
       </Container>
     </Section>
-  )
+  );
 }

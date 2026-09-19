@@ -1,4 +1,5 @@
 import { ArrowUp, Mail } from 'lucide-react'
+import { useLocation } from 'react-router-dom'
 import { GithubIcon, LinkedinIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { person } from '@/data/content'
@@ -10,6 +11,9 @@ const socials = [
 ]
 
 export function Footer() {
+  const { pathname } = useLocation()
+  const homeHref = pathname === '/' ? '#home' : '/#home'
+
   return (
     <footer className="border-border relative border-t">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 py-10 text-center sm:flex-row sm:justify-between sm:text-left">
@@ -37,7 +41,7 @@ export function Footer() {
           ))}
 
           <Button asChild variant="ghost" size="icon-lg" aria-label="Back to top">
-            <a href="#home">
+            <a href={homeHref}>
               <ArrowUp aria-hidden="true" />
             </a>
           </Button>

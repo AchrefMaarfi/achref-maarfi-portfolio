@@ -1,4 +1,5 @@
 import { ArrowUpRight, Globe } from "lucide-react";
+import { Link } from "react-router-dom";
 import { GithubIcon } from "@/components/icons";
 import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import { Container } from "@/components/layout/Container";
@@ -8,6 +9,11 @@ import { SectionHeader } from "@/components/layout/SectionHeader";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { featuredProject, projects } from "@/data/content";
+
+/** True for a same-app path ("/projects/planit"); false for a full URL. */
+function isInternalPath(href: string) {
+  return href.startsWith("/") && !href.startsWith("//");
+}
 
 export function Projects() {
   return (
@@ -27,6 +33,11 @@ export function Projects() {
                 label="planit.jpg — 1200×675"
                 alt={featuredProject.imageAlt}
                 aspect="video"
+                src={
+                  featuredProject.hasRealImage
+                    ? featuredProject.image
+                    : undefined
+                }
               />
               <CardContent className="flex flex-col justify-center gap-4 px-6 py-8 md:px-10">
                 <Badge
@@ -67,17 +78,28 @@ export function Projects() {
                   ))}
                 </div>
 
-                {featuredProject.link && (
-                  <a
-                    href={featuredProject.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary mt-2 inline-flex w-fit items-center gap-1 text-sm font-semibold hover:underline"
-                  >
-                    View {featuredProject.title} project
-                    <ArrowUpRight className="size-4" aria-hidden="true" />
-                  </a>
-                )}
+                {featuredProject.link &&
+                  (isInternalPath(featuredProject.link) ? (
+                    <Link
+                      to={featuredProject.link}
+                      className="text-primary mt-2 inline-flex w-fit items-center gap-1 text-sm font-semibold hover:underline"
+                    >
+                      {featuredProject.linkLabel ??
+                        `View ${featuredProject.title} project`}
+                      <ArrowUpRight className="size-4" aria-hidden="true" />
+                    </Link>
+                  ) : (
+                    <a
+                      href={featuredProject.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary mt-2 inline-flex w-fit items-center gap-1 text-sm font-semibold hover:underline"
+                    >
+                      {featuredProject.linkLabel ??
+                        `View ${featuredProject.title} project`}
+                      <ArrowUpRight className="size-4" aria-hidden="true" />
+                    </a>
+                  ))}
               </CardContent>
             </div>
           </Card>

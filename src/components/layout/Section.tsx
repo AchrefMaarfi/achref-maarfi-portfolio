@@ -1,8 +1,8 @@
-import type { ComponentProps } from 'react'
-import { cn } from '@/lib/utils'
-import { sectionTitleId } from './sectionTitleId'
+import type { ComponentProps } from "react";
+import { cn } from "@/lib/utils";
+import { sectionTitleId } from "./sectionTitleId";
 
-type SectionProps = ComponentProps<'section'> & { id: string }
+type SectionProps = ComponentProps<"section"> & { id: string };
 
 /**
  * A named page section. `aria-labelledby` points at `${id}-title`, which
@@ -14,8 +14,11 @@ export function Section({ id, className, ...props }: SectionProps) {
     <section
       id={id}
       aria-labelledby={sectionTitleId(id)}
-      className={cn('relative scroll-mt-20 py-20 md:py-28', className)}
+      className={cn(
+        "relative scroll-mt-16 py-20 sm:scroll-mt-20 md:py-28",
+        className,
+      )}
       {...props}
     />
-  )
+  );
 }

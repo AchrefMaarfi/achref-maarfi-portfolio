@@ -347,10 +347,12 @@ export const featuredProject = {
     { label: "AI", items: ["Google Gemini API"] },
   ],
   stack: ["Next.js", "Django", "PostgreSQL", "Docker", "Gemini API"],
-  image: "/assets/planit.jpg",
+  image: "/assets/planit/create-post.png",
   imageAlt:
-    "Plan’IT dashboard showing the content scheduling calendar and analytics panel",
-  link: null,
+    "Plan’IT post composer with AI caption generation and engagement prediction",
+  hasRealImage: true,
+  link: "/projects/planit",
+  linkLabel: "Project Details",
 } satisfies FeaturedProject;
 
 export const projects = [
@@ -361,7 +363,8 @@ export const projects = [
       "A browser-based tool that overlays a logo onto batches of photos entirely client-side — nothing is uploaded, everything processes locally.",
     stack: ["HTML", "CSS", "JavaScript"],
     image: "/assets/logoverlay.png",
-    imageAlt: "Logo Overlay Studio interface showing batch settings and file upload panels",
+    imageAlt:
+      "Logo Overlay Studio interface showing batch settings and file upload panels",
     link: "https://logoverlay.vercel.app/",
     githubLink: "https://github.com/AchrefMaarfi/Logoverlay",
     demoLink: "https://logoverlay.vercel.app/",
@@ -381,57 +384,57 @@ export const projects = [
     demoLink: "https://video-editor-portfolio-blush-six.vercel.app/",
     hasRealImage: true,
   },
-  {
-    title: "WhereToGo",
-    tag: "Microservices",
-    description:
-      "Event creation and registration platform built on a microservices architecture with Keycloak authentication.",
-    stack: ["Spring Boot", "Angular", "Docker", "Keycloak"],
-    image: "/assets/wheretogo.jpg",
-    imageAlt: "WhereToGo event listing page with registration options",
-    link: null,
-  },
-  {
-    title: "Angular Dashboard",
-    tag: "Business Dashboard",
-    description:
-      "Administrative dashboard for business management with analytics, a modern responsive UI and component-based architecture.",
-    stack: ["Angular", "TypeScript"],
-    image: "/assets/angular-dashboard.jpg",
-    imageAlt: "Angular admin dashboard with analytics charts",
-    link: null,
-  },
-  {
-    title: "React Website & Dashboard",
-    tag: "Web Interfaces",
-    description:
-      "Responsive web interfaces and dashboards with API integration and reusable components.",
-    stack: ["React", "Tailwind CSS"],
-    image: "/assets/react-dashboard.jpg",
-    imageAlt: "React dashboard interface built with Tailwind CSS",
-    link: null,
-  },
-  {
-    title: "Spring Boot + Angular App",
-    tag: "Enterprise Full-Stack",
-    description:
-      "Enterprise-style full-stack application with REST APIs and authentication.",
-    stack: ["Spring Boot", "Angular", "REST"],
-    image: "/assets/springboot-angular.jpg",
-    imageAlt:
-      "Enterprise application screen built with Spring Boot and Angular",
-    link: null,
-  },
-  {
-    title: "Symfony Academic Project",
-    tag: "MVC Application",
-    description:
-      "Full-stack MVC application with database integration and an authentication system.",
-    stack: ["Symfony", "PHP", "MySQL"],
-    image: "/assets/symfony.jpg",
-    imageAlt: "Symfony web application interface",
-    link: null,
-  },
+  // {
+  //   title: "WhereToGo",
+  //   tag: "Microservices",
+  //   description:
+  //     "Event creation and registration platform built on a microservices architecture with Keycloak authentication.",
+  //   stack: ["Spring Boot", "Angular", "Docker", "Keycloak"],
+  //   image: "/assets/wheretogo.jpg",
+  //   imageAlt: "WhereToGo event listing page with registration options",
+  //   link: null,
+  // },
+  // {
+  //   title: "Angular Dashboard",
+  //   tag: "Business Dashboard",
+  //   description:
+  //     "Administrative dashboard for business management with analytics, a modern responsive UI and component-based architecture.",
+  //   stack: ["Angular", "TypeScript"],
+  //   image: "/assets/angular-dashboard.jpg",
+  //   imageAlt: "Angular admin dashboard with analytics charts",
+  //   link: null,
+  // },
+  // {
+  //   title: "React Website & Dashboard",
+  //   tag: "Web Interfaces",
+  //   description:
+  //     "Responsive web interfaces and dashboards with API integration and reusable components.",
+  //   stack: ["React", "Tailwind CSS"],
+  //   image: "/assets/react-dashboard.jpg",
+  //   imageAlt: "React dashboard interface built with Tailwind CSS",
+  //   link: null,
+  // },
+  // {
+  //   title: "Spring Boot + Angular App",
+  //   tag: "Enterprise Full-Stack",
+  //   description:
+  //     "Enterprise-style full-stack application with REST APIs and authentication.",
+  //   stack: ["Spring Boot", "Angular", "REST"],
+  //   image: "/assets/springboot-angular.jpg",
+  //   imageAlt:
+  //     "Enterprise application screen built with Spring Boot and Angular",
+  //   link: null,
+  // },
+  // {
+  //   title: "Symfony Academic Project",
+  //   tag: "MVC Application",
+  //   description:
+  //     "Full-stack MVC application with database integration and an authentication system.",
+  //   stack: ["Symfony", "PHP", "MySQL"],
+  //   image: "/assets/symfony.jpg",
+  //   imageAlt: "Symfony web application interface",
+  //   link: null,
+  // },
 ] satisfies Project[];
 
 // ---------------------------------------------------------------------------
