@@ -11,8 +11,16 @@ import { Projects } from "@/components/Projects";
 import { SectionMap } from "@/components/SectionMap";
 import { Services } from "@/components/Services";
 import { Skills } from "@/components/Skills";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 
 function App() {
+  useDocumentMeta({
+    title: "Achref Maarfi | Software Engineer",
+    description:
+      "Software Engineer based in Tunisia. Full-stack engineer crafting scalable, user-centered web applications with React, Next.js, Django and PostgreSQL.",
+    path: "/",
+  });
+
   return (
     <>
       <Particles />

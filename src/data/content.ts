@@ -40,13 +40,25 @@ export interface ToolBelt {
   skills: string[];
 }
 
+/** A distinct title/date range within one company (LinkedIn-style grouped roles). */
+export interface ExperiencePosition {
+  title: string;
+  type: string;
+  start: string;
+  end: string;
+  bullets: string[];
+}
+
 export interface ExperienceEntry {
   role: string;
   company: string;
   location: string;
   start: string;
   end: string;
-  bullets: string[];
+  /** Present on a single-role entry; omitted when `positions` groups several roles at this company. */
+  bullets?: string[];
+  /** Present when this company had multiple distinct roles, rendered as sub-entries. */
+  positions?: ExperiencePosition[];
   stack: string[];
 }
 
@@ -238,51 +250,68 @@ export const toolBelts = [
 
 export const experience = [
   {
-    role: "Software Engineering Intern",
+    role: "Software Engineer",
     company: "Business Management Group (BMG)",
     location: "Ariana, Tunisia",
-    start: "Feb 2025",
-    end: "Sept 2025",
-    bullets: [
-      "Developed a full-stack social media management platform with Next.js, Django REST Framework and PostgreSQL to centralize content planning and publishing.",
-      "Designed secure RESTful APIs, authentication, and scalable backend services for multi-user account management.",
-      "Integrated Google Gemini AI to automate social media caption generation.",
-      "Used Docker, Celery and WebSockets for containerized deployment, background tasks and real-time features.",
+    start: "Jul 2024",
+    end: "Present",
+    positions: [
+      {
+        title: "Full-Stack Software Engineer",
+        type: "Full-time",
+        start: "Oct 2024",
+        end: "Present",
+        bullets: [
+          "Developed a full-stack social media management platform with Next.js, Django REST Framework and PostgreSQL to centralize content planning and publishing.",
+          "Designed secure RESTful APIs, authentication, and scalable backend services for multi-user account management.",
+          "Integrated Google Gemini AI to automate social media caption generation.",
+          "Used Docker, Celery and WebSockets for containerized deployment, background tasks and real-time features.",
+        ],
+      },
+      {
+        title: "Software Engineering Intern (PFE — End of Studies)",
+        type: "Internship",
+        start: "Feb 2025",
+        end: "Aug 2025",
+        bullets: [
+          "Completed the end-of-studies internship (PFE) in parallel with the full-time role above, using the same platform as the academic project.",
+        ],
+      },
+      {
+        title: "Frontend Web Developer Intern",
+        type: "Internship",
+        start: "Jul 2024",
+        end: "Aug 2024",
+        bullets: [
+          "Converted a Figma prototype into a fully responsive React web platform for a Pilates studio, styled with Tailwind CSS.",
+          "Delivered pixel-perfect UI alongside designers and optimized components for performance and UX.",
+        ],
+      },
     ],
     stack: [
+      "React",
       "Next.js",
       "Django REST Framework",
       "PostgreSQL",
       "Docker",
       "Celery",
       "WebSockets",
+      "Tailwind CSS",
     ],
   },
   {
     role: "Frontend Web Developer Intern",
-    company: "Business Management Group (BMG)",
-    location: "Ariana, Tunisia",
-    start: "Jul 2024",
-    end: "Aug 2024",
-    bullets: [
-      "Converted a Figma prototype into a fully responsive React web platform for a Pilates studio, styled with Tailwind CSS.",
-      "Delivered pixel-perfect UI alongside designers and optimized components for performance and UX.",
-    ],
-    stack: ["React", "Tailwind CSS", "Figma"],
-  },
-  {
-    role: "Frontend Web Developer Intern",
-    company: "INSTAR — Cité de la Culture",
+    company: "INSTAR",
     location: "Tunis, Tunisia",
     start: "Jul 2023",
     end: "Aug 2023",
     bullets: [
-      "Built an administrative management web application for the Cité de la Culture.",
+      "Built the admin dashboard for Indar, a décor product catalog and ordering app, to manage products for the client-facing mobile app.",
     ],
     stack: ["Angular 16", "MongoDB"],
   },
   {
-    role: "End of Studies Intern — Web Development",
+    role: "End of Studies Intern (PFE — ISET Béja) — Web Development",
     company: "Move Up IT Solutions",
     location: "Tunis, Tunisia",
     start: "Jan 2022",

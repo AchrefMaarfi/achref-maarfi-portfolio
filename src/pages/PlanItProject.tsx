@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { featuredProject } from "@/data/content";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 
 const highlights = [
   {
@@ -42,6 +43,12 @@ const highlights = [
 ];
 
 export function PlanItProject() {
+  useDocumentMeta({
+    title: `${featuredProject.title} | Achref Maarfi`,
+    description: featuredProject.description,
+    path: "/projects/planit",
+  });
+
   return (
     <div className="min-h-screen">
       <Particles accentOnly />
