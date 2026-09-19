@@ -33,30 +33,38 @@ export function Contact() {
           {contact.links.map((link, i) => {
             const Icon = icons[link.label as keyof typeof icons]
             const colorClass = colors[link.label as keyof typeof colors]
+            const cardContent = (
+              <Card variant="glow" className="h-full">
+                <CardContent className="flex min-h-11 items-center gap-4">
+                  <div
+                    className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${colorClass}`}
+                  >
+                    <Icon className="size-5" aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
+                      {link.label}
+                    </p>
+                    <p className="truncate text-sm font-medium">{link.value}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            )
+
             return (
               <Reveal key={link.label} delay={i * 60}>
-                <a
-                  href={link.href}
-                  target={link.external ? '_blank' : undefined}
-                  rel={link.external ? 'noopener noreferrer' : undefined}
-                  aria-label={`${link.label}: ${link.value}`}
-                >
-                  <Card variant="glow" className="h-full">
-                    <CardContent className="flex min-h-11 items-center gap-4">
-                      <div
-                        className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${colorClass}`}
-                      >
-                        <Icon className="size-5" aria-hidden="true" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
-                          {link.label}
-                        </p>
-                        <p className="truncate text-sm font-medium">{link.value}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </a>
+                {link.href ? (
+                  <a
+                    href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                    aria-label={`${link.label}: ${link.value}`}
+                  >
+                    {cardContent}
+                  </a>
+                ) : (
+                  <div aria-label={`${link.label}: ${link.value}`}>{cardContent}</div>
+                )}
               </Reveal>
             )
           })}

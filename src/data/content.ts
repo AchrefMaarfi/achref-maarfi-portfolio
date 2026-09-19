@@ -574,8 +574,8 @@ export const contact = {
     {
       label: "Location",
       value: person.location,
-      href: "https://maps.google.com/?q=Ariana,Tunisia",
-      external: true,
+      href: "",
+      external: false,
     },
   ] satisfies ContactLink[],
 } as const;
