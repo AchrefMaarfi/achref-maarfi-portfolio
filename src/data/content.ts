@@ -391,7 +391,8 @@ export const projects = [
     description:
       "A browser-based tool that overlays a logo onto batches of photos entirely client-side — nothing is uploaded, everything processes locally.",
     stack: ["HTML", "CSS", "JavaScript"],
-    image: "/assets/logoverlay.png",
+    image: "/assets/logoverlay-light.png",
+    imageDark: "/assets/logoverlay-dark.png",
     imageAlt:
       "Logo Overlay Studio interface showing batch settings and file upload panels",
     link: "https://logoverlay.vercel.app/",
@@ -408,9 +409,9 @@ export const projects = [
     image: "/assets/video-editor-portfolio-light.png",
     imageDark: "/assets/video-editor-portfolio-dark.png",
     imageAlt: "Video editor portfolio website homepage",
-    link: "https://video-editor-portfolio-blush-six.vercel.app/",
+    link: "https://akrem-m-portfolio.vercel.app/",
     githubLink: "https://github.com/AchrefMaarfi/video-editor-portfolio",
-    demoLink: "https://video-editor-portfolio-blush-six.vercel.app/",
+    demoLink: "https://akrem-m-portfolio.vercel.app/",
     hasRealImage: true,
   },
   // {
